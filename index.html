@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flats for Sale</title>
+  <!-- Add Google Fonts Manrope -->
+  <link href="https://fonts.googleapis.com/css?family=Manrope:400,600,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Manrope', Arial, sans-serif;
+      padding: 20px;
+      background: #f3f4f6; /* Subtle grey background */
+    }
+
+    #filters {
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin-right: 20px;
+    }
+
+    .flat-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 15px;
+      max-width: 260px; /* increased from 200px to 260px */
+      width: 100%;
+      transition: box-shadow 0.3s;
+    }
+
+    .flat-card img {
+      max-width: 100%;
+      border-radius: 6px;
+      transition: filter 0.3s, opacity 0.3s;
+    }
+
+    .flat-card:hover {
+      box-shadow: 0 4px 24px rgba(80, 120, 200, 0.18);
+    }
+
+    .flat-card:hover img {
+      filter: hue-rotate(120deg) brightness(1.1);
+      opacity: 0.9;
+    }
+
+    #flats-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 40px; /* half as small */
+    }
+
+    .flat-card h3 {
+      font-size: 1.8em;         /* 2px smaller than 2em (approx) */
+      margin-top: 0.2em;
+      margin-bottom: 0.2em;
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: calc(2em + 15px);
+      font-weight: 900;
+      text-align: center;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lakáskínálatunk</h1>
+
+  <div id="filters">
+    <label>
+      Bedrooms:
+      <select id="filter-rooms">
+        <option value="">All</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </label>
+
+    <label>
+      Floor:
+      <select id="filter-floor">
+        <option value="">All</option>
+        <option value="4">4th</option>
+        <option value="5">5th</option>
+      </select>
+    </label>
+
+    <label>
+      Max Price:
+      <input type="number" id="filter-price" placeholder="e.g. 100000">
+    </label>
+  </div>
+
+  <div style="display: flex; gap: 40px;">
+    <div style="flex: 2;">
+      <div id="flats-container"></div>
+    </div>
+    <div style="flex: 1; min-width: 340px; display: flex; align-items: center; justify-content: center; height: 100%;">
+      <!-- Example SVG floorplan with 10 flats -->
+      <svg width="320" height="400" viewBox="0 0 320 400" style="background:#f8f8f8; border-radius:12px; border:1px solid #ddd;">
+        <defs>
+          <linearGradient id="flat-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#a18cd1" offset="0%"/>
+            <stop stop-color="#fbc2eb" offset="100%"/>
+          </linearGradient>
+        </defs>
+        <g font-family="Arial" font-size="18" font-weight="800" text-anchor="middle" dominant-baseline="middle">
+          <!-- Row 1 -->
+          <rect id="svg-K401" x="10"  y="10"  width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="55"  y="55">K401</text>
+          <rect id="svg-K402" x="110" y="10"  width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="155" y="55">K402</text>
+          <rect id="svg-K403" x="210" y="10"  width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="255" y="55">K403</text>
+          <!-- Row 2 -->
+          <rect id="svg-K404" x="10"  y="110" width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="55"  y="155">K404</text>
+          <rect id="svg-K405" x="110" y="110" width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="155" y="155">K405</text>
+          <rect id="svg-K406" x="210" y="110" width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="255" y="155">K406</text>
+          <!-- Row 3 -->
+          <rect id="svg-K407" x="10"  y="210" width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="55"  y="255">K407</text>
+          <rect id="svg-K408" x="110" y="210" width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="155" y="255">K408</text>
+          <rect id="svg-K409" x="210" y="210" width="90" height="90" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="255" y="255">K409</text>
+          <!-- Row 4 (one flat centered) -->
+          <rect id="svg-K410" x="110" y="310" width="90" height="80" fill="#666666" fill-opacity="0.4" stroke="#333" stroke-width="3"/>
+          <text x="155" y="350">K410</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <!-- Modal -->
+<div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+  background:rgba(0,0,0,0.5); display:none; justify-content:center; align-items:center;">
+  <div id="modal-content" style="background:white; padding:20px; border-radius:8px; max-width:400px; width:90%;">
+  </div>
+</div>
+
+</body>
+</html>
